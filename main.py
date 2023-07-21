@@ -1,8 +1,10 @@
+#!/home/bitawatt/anaconda3/envs/fractals-env/bin/python
 import screen_utils
 import config
 import pygame
 import random
 import sys
+import keyboard
 from lines import lines
 from spiro import spiro
 # from kaleidoscope import *
@@ -14,7 +16,7 @@ from mandelbrot import mandelbrot
 from lorenz import lorenz
 from novaretti import novaretti
 from flame import flame
-from orbit import orbit
+from orbit import satellite
 
 
 def main():
@@ -22,9 +24,9 @@ def main():
     if config.verbose:
         print(pygame.display.get_surface().get_size())
     running = True
-    fractal_favored = ["mandelbrot", "flame", "ifs", "novaretti", "lorenz", "spiro", "lines", "hopalong", "biomorph",
+    fractal_favored = ["mandelbrot", "flame", "ifs", "novaretti", "lorenz", "spiro", "hopalong", "biomorph",
                        "newton"]
-    fractal_out_of_favor = ["orbit"]
+    fractal_out_of_favor = ["lines", "satellite"]
     while running:
         if config.testing:
             mandelbrot(screen, 4)
@@ -36,8 +38,8 @@ def main():
                 flame(screen, 1)
             elif x == "ifs":
                 ifs(screen)
-            elif x == "orbit":
-                orbit(screen)
+            # elif x == "satellite":
+            #     satellite(screen)
             elif x == "novaretti":
                 novaretti(screen, 1)
             elif x == "lorenz":
@@ -66,4 +68,14 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("Exiting...")
+        sys.exit(0)
+
+    # detect Spacebar or Esc key to exit
+    if keyboard.is_pressed("space") or keyboard.is_pressed("esc"):
+        # do something
+        print("Exiting...")
+        sys.exit(0)      
