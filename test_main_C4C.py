@@ -69,6 +69,10 @@ def main():
                 flame(screen, 1)
                 module_name = "Flame"
 
+            # Call the module functions first
+            pygame.display.flip()
+            # Then draw the text:
+            
             # Display the name of the current module
             pygame.display.set_caption('Fractals - ' + module_name)
             font = pygame.font.SysFont("Comic Sans MS", 30)
